@@ -8,7 +8,7 @@
         <el-input v-model="loginForm.password" :show-password="true"></el-input>
       </el-form-item>
       <el-form-item>
-          <el-button type="primary" @click="onSubmit">登陆</el-button>
+        <el-button type="primary" @click="onSubmit">登陆</el-button>
       </el-form-item>
     </el-form>
   </main>
@@ -32,7 +32,8 @@ const onSubmit = () => {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: url('~@/assets/images/login_bg.jpeg') no-repeat;
+  background: url('~@/assets/images/login_bg.jpeg');
+  background-size: cover;
 
   .login-form {
     width: 400px;
