@@ -6,4 +6,4 @@ export function userLogin(params: unknown): Promise<unknown> {
 
 export default {
   userLogin
-}
+};

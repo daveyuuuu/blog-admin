@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios';
 
 interface Response {
   code: number;
@@ -7,39 +7,41 @@ interface Response {
 }
 
 const service = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://127.0.0.1/api/',
   timeout: 5000
-})
+});
 
 function handleError(err: unknown) {
   console.log(err);
 }
 
-axios.interceptors.response.use(
+service.interceptors.response.use(
   (res: AxiosResponse<Response>) => {
     const { data } = res;
     switch (data.code) {
       case 0:
-        Promise.resolve(data.data);
+        return Promise.resolve(data);
         break;
       case -1:
-        Promise.reject(data.message);
+        return Promise.reject(data.message);
         break;
       default:
+        return Promise.resolve(data);
         break;
     }
   },
   err => {
-    handleError(err)
-    return Promise.reject(err)
+    handleError(err);
+    return Promise.reject(err);
   }
-)
+);
 
 function request(url: string, data: unknown): Promise<unknown> {
   return service.request({
     url,
-    data
-  })
+    data,
+    method: 'post'
+  });
 }
 
-export default request
+export default request;
